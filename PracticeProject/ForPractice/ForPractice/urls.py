@@ -16,11 +16,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from ForPractice.views import show, home
+from .views import num, home
+from MyApp.views import showData
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('show/<int:num>', show),
-    path('home/', home)
+    path('num/<int:num>', num),
+    path('home/', home),
+    path('show/', showData),
+
 ]

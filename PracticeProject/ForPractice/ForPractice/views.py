@@ -1,6 +1,6 @@
 from django.shortcuts import HttpResponse, render
 
-def show(request, num):
+def num(request, num):
     a = num
     x = "is the square of"
     y = a*a

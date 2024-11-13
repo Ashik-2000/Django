@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import num, home
-from MyApp.views import showData
+from MyApp.views import showData, formData
 
 
 urlpatterns = [
@@ -25,5 +25,5 @@ urlpatterns = [
     path('num/<int:num>', num),
     path('home/', home),
     path('show/', showData),
-
+    path('', formData),
 ]

@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import Students
 # Create your views here.
 
@@ -14,3 +14,7 @@ def formData(request):
         pnumber = request.POST.get('pnumber')
         Students.objects.create(name=pname, dept=pdpt, email=pemail, phone=pnumber)
     return render(request, 'form.html')
+
+def deleteData(request,pk):
+    Students.objects.get(id=pk).delete()
+    return redirect('showData')

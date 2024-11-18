@@ -17,13 +17,14 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import num, home
-from MyApp.views import showData, formData
+from MyApp.views import showData, formData, deleteData
 
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls,),
     path('num/<int:num>', num),
     path('home/', home),
-    path('show/', showData),
-    path('', formData),
+    path('show/', showData, name="showData"),
+    path('', formData, name="form"),
+    path('delete/<int:pk>', deleteData, name="delete"),
 ]

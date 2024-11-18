@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from .views import num, home
-from MyApp.views import showData, formData, deleteData
+from MyApp.views import showData, formData, deleteData, updateData
 
 
 urlpatterns = [
@@ -26,5 +26,6 @@ urlpatterns = [
     path('home/', home),
     path('show/', showData, name="showData"),
     path('', formData, name="form"),
+    path('update/<int:id>', updateData, name="update"),
     path('delete/<int:pk>', deleteData, name="delete"),
 ]

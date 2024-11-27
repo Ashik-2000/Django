@@ -16,10 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from MyApp.views import form
+from MyApp.views import form, data, deleteData, updateData
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
+    path('admin/', admin.site.urls, name='admin'),
     path('', include('MyApp.urls')),
     path('form/', form, name='form'),
+    path('data/', data, name='data'),
+    path('delete/<int:id>', deleteData, name='delete'),
+    path('update/<int:id>', updateData, name='update'),
 ]

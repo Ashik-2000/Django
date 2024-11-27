@@ -51,9 +51,11 @@ def deleteData(request, id):
 def updateData(request, id):
     if request.method == 'POST':
         obj = Student.objects.get(id = id)
-        obj.name = Student.POST.get('iname')
-        obj.dept = Student.POST.get('idpt')
-        obj.email = Student.POST.get('imail')
-        obj.phone = Student.POST.get('iphone')
+        obj.name = request.POST.get('iname')
+        obj.dept = request.POST.get('idpt')
+        obj.email = request.POST.get('imail')
+        obj.phone = request.POST.get('iphone')
+        obj.save()
+        return redirect('data')
     obj = Student.objects.get(id = id)
     return render(request, 'update.html', {'obj': obj})

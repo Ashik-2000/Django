@@ -20,5 +20,5 @@ from MyApp.views import form
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', form),
+    path('', form, name='form'),
 ]

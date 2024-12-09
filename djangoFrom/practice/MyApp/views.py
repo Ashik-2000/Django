@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from .models import MembersData
 from .forms import Members
 
@@ -11,4 +11,5 @@ def form(req):
         paid = req.POST.get('paid')
         obj = MembersData.objects.create(name = name, email = email, paid = paid)
         obj.save()
+        return redirect('form')
     return render(req, 'form.html', {'obj': obj})

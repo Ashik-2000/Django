@@ -1,0 +1,7 @@
+<h1>Update Tasks</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{TaskForm}}
+    <input type="submit" class="btn" value="Update" name="Update Task">
+</form>

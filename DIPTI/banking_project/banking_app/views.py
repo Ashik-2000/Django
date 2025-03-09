@@ -6,6 +6,15 @@ from rest_framework.response import Response
 from django.contrib.auth import authenticate, login, logout
 from .models import Account
 from .serializers import UserSerializer, AccountSerializer, TransactionSerializer
+from rest_framework.authentication import SessionAuthentication
+
+class CsrfExemptSessionAuthentication(SessionAuthentication):
+    """
+    SessionAuthentication class that doesn't enforce CSRF checking.
+    Only use for development!
+    """
+    def enforce_csrf(self, request):
+        return  # To not perform the CSRF check
 
 class RegisterView(APIView):
     permission_classes = [permissions.AllowAny]
@@ -31,6 +40,7 @@ class LoginView(APIView):
         return Response({"error": "Invalid credentials"}, status=status.HTTP_401_UNAUTHORIZED)
 
 class LogoutView(APIView):
+    authentication_classes = [CsrfExemptSessionAuthentication]
     def post(self, request):
         logout(request)
         return Response({"message": "Logout successful"}, status=status.HTTP_200_OK)
@@ -42,6 +52,7 @@ class AccountView(APIView):
         return Response(serializer.data)
 
 class DepositView(APIView):
+    authentication_classes = [CsrfExemptSessionAuthentication]
     def post(self, request):
         serializer = TransactionSerializer(data=request.data)
         if serializer.is_valid():
@@ -55,6 +66,7 @@ class DepositView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class WithdrawView(APIView):
+    authentication_classes = [CsrfExemptSessionAuthentication]
     def post(self, request):
         serializer = TransactionSerializer(data=request.data)
         if serializer.is_valid():

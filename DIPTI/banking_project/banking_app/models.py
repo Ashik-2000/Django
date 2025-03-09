@@ -1,4 +1,5 @@
 # Define the Account model to store user balance
+
 from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
@@ -26,3 +27,13 @@ class Account(models.Model):
         self.balance -= amount
         self.save()
         return True
+    
+# Create Account automatically when User is created
+@receiver(post_save, sender=User)
+def create_user_account(sender, instance, created, **kwargs):
+    if created:
+        Account.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_account(sender, instance, **kwargs):
+    instance.account.save()
